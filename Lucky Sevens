@@ -1,0 +1,15 @@
+def lucky_sevens?(numbers)
+  if numbers.length < 3
+    return nil
+  end
+
+  i = 2
+  while i <= numbers.length
+    if (numbers[i] + numbers[i-1] + numbers[i-2] == 7)
+      return true
+    else 
+      return false
+    end
+  i += 1
+end
+end
