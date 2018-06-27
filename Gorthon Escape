@@ -42,8 +42,8 @@ class CentralCorridor < Scene
     You will have to plant the bomb and then get to the escape pod before the ship is blown to smithereens.\n
     You slam your fist into the control panel that opens the door in front of you and find yourself in the main corridor of the ship. \n
     A Gorthon!\n
-    The only way into the armory is through that guy!
-    You must defeat it by telling a joke!\n\n\n"
+    The only way into the armory is through that guy!\n
+    You must defeat it by telling a joke! What do you do? \n\n\n"
 
   action = gets.chomp
 
@@ -56,7 +56,7 @@ class CentralCorridor < Scene
   return 'death'
 
   elsif action == "tell a joke"
-  puts "You take a deep breath and tell the only Gorthon joke you know: dsgrhh jnfdj tts, fdo snri ds ry. The Gorthon pauses before a something that sounds like air escaping from a tire comes out of its mouth. It's laughing! You sneak past the Gorthon and into the Armory."
+  puts "You take a deep breath and tell the only Gorthon joke you know: dsgrhh jnfdj tts, fdo snri ds ry. The Gorthon pauses before a something that sounds like air escaping from a tire comes out of its mouth. It's laughing! You sneak past the Gorthon and into the Armory.\n\n"
   return 'laser_weapon_armory'
 
   else
@@ -68,22 +68,24 @@ end
 
 class LaserWeaponArmory < Scene
   def enter()
-    puts "You enter the armory, there is no Gorthon in sight. However, there is a 3 digit keycode to the case for the bomb. You haven't opened this lock in forever! You have forgotten the code. The only thing you remember is if you get the code wrong 10 times, it is locked forever."
+    puts "You enter the armory, there is no Gorthon in sight. However, there is a 3 digit keycode to the case for the bomb. You haven't opened this lock in forever! You have forgotten the code. The only thing you remember is if you get the code wrong 10 times, it is locked forever.\n\n"
 
     code = "#{rand(0..9)}#{rand(0..9)}#{rand(0..9)}"
     print "[keypad] "
-    guess = gets.chomp
+    g = gets.chomp
+    guess = g.to_i
     guesses = 0
 
-    while guess != code && guess < 10
+    while guess != code && guesses < 10
       print "ERROR WRONG CODE"
       guesses += 1
       print "[keypad] "
-      guess = gets.chomp
+      g = gets.chomp
+      guess = g.to_i
     end
 
-    if guess == code
-      print "ACCESS GRANTED./n
+    if guess == code || guesses == 10
+      print "ACCESS GRANTED.\n
       You grab the bomb and bolt towards the bridge of the ship."
       return 'the_bridge'
     else
@@ -95,8 +97,8 @@ end
 
 class TheBridge < Scene
   def enter()
-    puts "There is a group of angry looking Gorthons. They have just seen how you've distracted their buddy and are not pleased./n
-    /n
+    puts "There is a group of angry looking Gorthons. They have just seen how you've distracted their buddy and are not pleased.\n
+    \n
     What do you do? Place the bomb or throw it?"
     answer = gets.chomp
 
@@ -151,7 +153,7 @@ class Map
   end
 
   def next_scene(scene_name)
-    val == @@scenes[scene_name]
+    val = @@scenes[scene_name]
     return val
   end
 
@@ -163,3 +165,4 @@ end
 a_map = Map.new('central_corridor')
 a_game = Engine.new(a_map)
 a_game.play()
+end
