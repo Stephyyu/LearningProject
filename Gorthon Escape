@@ -1,0 +1,165 @@
+class Scene
+  def enter()
+    puts "That option is not available!" #put something all scenes do in this section
+    exit(1)
+  end
+end
+
+class Engine
+  def initialize(scene_map)
+    @scene_map = scene_map
+  end
+
+  def play()
+    current_scene = @scene_map.opening_scene()
+    last_scene = @scene_map.next_scene('finished')
+
+    while current_scene != last_scene
+      next_scene_name = current_scene.enter()
+      current_scene = @scene_map.next_scene(next_scene_name)
+    end
+    current_scene.enter()
+  end
+end
+
+class Death < Scene
+  @@quips = [
+  "You have died! There's no more hope for the universe. The aliens are going to take over.",
+  "You have died! The aliens eat your face.",
+  "You have died! The aliens slash you into pieces."
+  ]
+
+  def enter()
+    puts @@quips[rand(0..(@@quips.length-1))]
+    exit(1)
+  end
+end
+
+class CentralCorridor < Scene
+  def enter()
+    puts "Aliens are invading the ship! \n
+    There's too many to fight alone! Then, you remember there is a neutron bomb that you have saved for emergencies like this in the laser weapon armory. The bad news is that the entire ship will be blown up. \n
+    You will have to plant the bomb and then get to the escape pod before the ship is blown to smithereens.\n
+    You slam your fist into the control panel that opens the door in front of you and find yourself in the main corridor of the ship. \n
+    A Gorthon!\n
+    The only way into the armory is through that guy!
+    You must defeat it by telling a joke!\n\n\n"
+
+  action = gets.chomp
+
+  if action == "shoot"
+  puts "It's armored body makes it impossible for your bullets to penetrate. It raises and arm and retaliates."
+  return 'death'
+
+  elsif action == "run"
+  puts "You try to run but the alien grabs you with its tentacles. There is no escape."
+  return 'death'
+
+  elsif action == "tell a joke"
+  puts "You take a deep breath and tell the only Gorthon joke you know: dsgrhh jnfdj tts, fdo snri ds ry. The Gorthon pauses before a something that sounds like air escaping from a tire comes out of its mouth. It's laughing! You sneak past the Gorthon and into the Armory."
+  return 'laser_weapon_armory'
+
+  else
+  puts "Please choose something else!"
+  return 'central_corridor'
+  end
+end
+end
+
+class LaserWeaponArmory < Scene
+  def enter()
+    puts "You enter the armory, there is no Gorthon in sight. However, there is a 3 digit keycode to the case for the bomb. You haven't opened this lock in forever! You have forgotten the code. The only thing you remember is if you get the code wrong 10 times, it is locked forever."
+
+    code = "#{rand(0..9)}#{rand(0..9)}#{rand(0..9)}"
+    print "[keypad] "
+    guess = gets.chomp
+    guesses = 0
+
+    while guess != code && guess < 10
+      print "ERROR WRONG CODE"
+      guesses += 1
+      print "[keypad] "
+      guess = gets.chomp
+    end
+
+    if guess == code
+      print "ACCESS GRANTED./n
+      You grab the bomb and bolt towards the bridge of the ship."
+      return 'the_bridge'
+    else
+      print "With a final click, the lock is snapped in place forever."
+      return 'death'
+    end
+  end
+end
+
+class TheBridge < Scene
+  def enter()
+    puts "There is a group of angry looking Gorthons. They have just seen how you've distracted their buddy and are not pleased./n
+    /n
+    What do you do? Place the bomb or throw it?"
+    answer = gets.chomp
+
+    if answer == "place the bomb"
+    puts "Good choice! We need to get out of here before they know what's coming!"
+    return 'escape_pod'
+    else if answer == "throw it"
+    puts "Bad choice! The bomb explodes upon impact and the ship is destroyed!"
+    return 'death'
+    else
+    puts "Choose something else! "
+    return 'the_bridge'
+    end
+  end
+end
+
+class EscapePod < Scene
+  def enter()
+    puts "You rush into the escape pod room, only-- which pod do you take? Have you maintained them all thoroughly as you were instructed to do? What if they don't work? There are 5 pods. Quickly choose one!"
+    choice = gets.chomp
+
+    good_pod = rand(0..5)
+    if choice != good_pod
+    puts "The pod doesn't start up. Either you forgot to refuel it or the Gorthons got here before you and sabotaged the pod. But it's too late. They are here. There's no time to get to another. They surround the pod and their gleaming eyes and tentacles are the last thing you ever saw."
+    return 'death'
+    else
+    puts "You did it! You are finally out! Your little escape pod zooms away from the main ship and you breathe a sigh of relief."
+    return 'finished'
+    end
+  end
+end
+
+class Finished < Scene
+  def enter()
+    puts "You win!"
+  end
+end
+
+
+class Map
+  @@scenes = {
+    'central_corridor' => CentralCorridor.new(),
+    'laser_weapon_armory' => LaserWeaponArmory.new(),
+    'the_bridge' => TheBridge.new(),
+    'escape_pod' => EscapePod.new(),
+    'death' => Death.new(),
+    'finished' => Finished.new(),
+  }
+
+  def initialize(start_scene)
+    @start_scene = start_scene
+  end
+
+  def next_scene(scene_name)
+    val == @@scenes[scene_name]
+    return val
+  end
+
+  def opening_scene()
+    return next_scene(@start_scene)
+  end
+end
+
+a_map = Map.new('central_corridor')
+a_game = Engine.new(a_map)
+a_game.play()
