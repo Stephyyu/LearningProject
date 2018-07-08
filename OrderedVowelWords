@@ -1,0 +1,25 @@
+def ordered_vowel_words(str)
+  letters = str.split(//)
+  letters.delete(' ')
+  letters.each do |vowel| 
+  if vowel != %w(a e i o u)
+  vowel.delete!
+  end
+  end
+  print vowel.join
+end
+
+puts("\nTests for #ordered_vowel_words")
+puts("===============================================")
+    puts "ordered_vowel_words(\"amends\") == \"amends\": "  + (ordered_vowel_words("amends") == "amends").to_s
+    puts "ordered_vowel_words(\"complicated\") == \"\": "  + (ordered_vowel_words("complicated") == "").to_s
+    puts "ordered_vowel_words(\"afoot\") == \"afoot\": "  + (ordered_vowel_words("afoot") == "afoot").to_s
+    puts "ordered_vowel_words(\"ham\") == \"ham\": "  + (ordered_vowel_words("ham") == "ham").to_s
+    puts "ordered_vowel_words(\"crypt\") == \"crypt\": "  + (ordered_vowel_words("crypt") == "crypt").to_s
+    puts "ordered_vowel_words(\"o\") == \"o\": "  + (ordered_vowel_words("o") == "o").to_s
+    puts "ordered_vowel_words(\"tamely\") == \"tamely\": "  + (ordered_vowel_words("tamely") == "tamely").to_s
+    
+    phrase = "this is a test of the vowel ordering system"
+    result = "this is a test of the system"
+    puts "ordered_vowel_words(phrase) == result: "  + (ordered_vowel_words(phrase) == result).to_s
+puts("===============================================")
