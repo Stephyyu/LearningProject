@@ -1,15 +1,11 @@
 def letter_count(str)
   letters = str.split(//) 
-  v = 1
+  letters.delete(' ')
+  print letters
+
   hash = {}
-  
-  letters.map do |k| 
-    if hash[k] != nil
-      v += 1
-    else
-      hash[k] = v
-    end 
-  end
+  hash.default = 0
+  letters.each { |k| hash[k] += 1 }
   print hash
 end
 
