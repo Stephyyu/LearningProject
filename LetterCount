@@ -1,15 +1,16 @@
 def letter_count(str)
-  letters = str.split
+  letters = str.split(//) 
   v = 1
   hash = {}
+  
   letters.map do |k| 
-    if hash[k] == nil
-    hash[k] = v
+    if hash[k] != nil
+      v += 1
     else
-    v += 1
+      hash[k] = v
     end 
   end
-  return hash
+  print hash
 end
 
 puts("\nTests for #letter_count")
