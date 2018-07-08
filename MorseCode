@@ -1,36 +1,39 @@
 def morse_encode(str)
-  letters = str.split(//)
-  
-  letters.gsub!(code)
-end
+ dictionary = {
+  a => ".-",
+  b => "-...",
+  c => "-.-.",
+  d => "-..",
+  e => ".",
+  f => "..-.",
+  g => "--.",
+  h => "....",
+  i => "..",
+  j => ".---",
+  k => "-.-",
+  l => ".-..",
+  m => "--",
+  n => "-.",
+  o => "---",
+  p => ".--.",
+  q => "--.-",
+  r => ".-.",
+  s => "...",
+  t => "-",
+  u => "..-",
+  v => "...-",
+  w => ".--",
+  x => "-..-",
+  y => "-.--",
+  z => "--..",
+}
 
-def code
-  a = ".-"
-  b = "-..."
-  c = "-.-."
-  d = "-.."
-  e = "."
-  f = "..-."
-  g = "--."
-  h = "...."
-  i = ".."
-  j = ".---"
-  k = "-.-"
-  l = ".-.."
-  m = "--"
-  n = "-."
-  o = "---"
-  p = ".--."
-  q = "--.-"
-  r = ".-."
-  s = "..."
-  t = "-"
-  u = "..-"
-  v = "...-"
-  w = ".--"
-  x = "-..-"
-  y = "-.--"
-  z = "--.."
+ letters = str.split(//)
+
+  if dictionary.has_key?(letters)
+  letters.gsub!
+  print letters
+  end
 end
 
 puts("\nTests for #morse_encode")
