@@ -1,0 +1,33 @@
+def streetFighterSelection(fighters, position, moves)
+
+  position = {
+  "Ryu" => (0,0)
+  "E. Honda" => (0,1)
+  "Blanka" => (0,2)
+  "Guile" => (0,3)
+  "Balrog" => (0,4)
+  "Vega" => (0,5)
+  "Ken" => (1,0)
+  "Chun Li" => (1,1)
+  "Zangief" => (1,2)
+  "Dhalsim" => (1,3)
+  "Sagat" => (1,4)
+  "M.Bison" => (1,5)
+  }
+  
+  def top_row
+    position == (0,0) || (0,1) || (0,2) || (0,3) || (0,4) || (0,5)
+  end
+  
+	case moves
+  when up
+    if position.top_row
+      return fighters[position]
+    else
+      position == (
+  when down
+  when left
+  when right
+  end
+  
+end
