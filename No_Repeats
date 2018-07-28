@@ -1,0 +1,19 @@
+
+def no_repeats(year_start, year_end)
+  arr = Array.new
+  (year_start..year_end).each do |i|
+    if no_repeat?(i)
+      arr << i
+    end
+  end
+  p arr
+end
+
+def no_repeat?(year)
+  x = year.to_s.split("")
+  if x.uniq.length != x.length
+    return false
+  else
+    return true
+  end
+end
