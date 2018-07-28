@@ -1,0 +1,25 @@
+def ordered_vowel_words(str)
+  word = str.split(' ')
+  arr2 = []
+  word.each do |x|
+    if ordered_vowel_word?(x)
+      arr2 << x
+    end
+  end
+  p arr2.join(' ')
+end
+
+def ordered_vowel_word?(word)
+  letters = word.split(//)
+  arr = []
+  letters.each do |x|
+    if %w(a e i o u).include?(x)
+      arr << x
+    end
+  end
+  if arr.sort == arr
+    return true
+  else
+    return false
+  end
+end
