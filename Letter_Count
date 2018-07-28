@@ -1,0 +1,8 @@
+def letter_count(str)
+  x = str.split(//)
+  h = Hash.new(0)
+  x.each do |y|
+      h[y] += 1 unless y == " "
+  end
+  h
+end
