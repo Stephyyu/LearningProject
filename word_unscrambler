@@ -1,0 +1,10 @@
+def word_unscrambler(word, dictionary)
+  wletters = word.split(//).sort.join
+  arr = []
+  dictionary.each do |x|
+    if x.split(//).sort.join == wletters
+      arr << x
+    end
+  end
+  arr
+end
