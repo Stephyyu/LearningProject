@@ -1,45 +1,43 @@
 def morse_encode(str)
- dictionary = {
-  a => ".-",
-  b => "-...",
-  c => "-.-.",
-  d => "-..",
-  e => ".",
-  f => "..-.",
-  g => "--.",
-  h => "....",
-  i => "..",
-  j => ".---",
-  k => "-.-",
-  l => ".-..",
-  m => "--",
-  n => "-.",
-  o => "---",
-  p => ".--.",
-  q => "--.-",
-  r => ".-.",
-  s => "...",
-  t => "-",
-  u => "..-",
-  v => "...-",
-  w => ".--",
-  x => "-..-",
-  y => "-.--",
-  z => "--..",
-}
-
- letters = str.split(//)
-
-  if dictionary.has_key?(letters)
-  letters.gsub!
-  print letters
+  word = str.split(' ')
+  arr2 = word.map do |y|
+    morse_encode_word(y)
   end
+  arr2.join('  ')
 end
 
-puts("\nTests for #morse_encode")
-puts("===============================================")
-    puts "morse_encode(\"q\") == \"--.-\": "  + (morse_encode("q") == "--.-").to_s
-    puts "morse_encode(\"cat\") == \"-.-. .- -\": "  + (morse_encode("cat") == "-.-. .- -").to_s
-    puts "morse_encode(\"cat in hat\") == \"-.-. .- -  .. -.  .... .- -\": "  + (morse_encode("cat in hat") == "-.-. .- -  .. -.  .... .- -").to_s
-
-puts("===============================================")
+def morse_encode_word(word)
+    dictionary = {
+  a: ".-",
+  b: "-...",
+  c: "-.-.",
+  d: "-..",
+  e: ".",
+  f: "..-.",
+  g: "--.",
+  h: "....",
+  i: "..",
+  j: ".---",
+  k: "-.-",
+  l: ".-..",
+  m: "--",
+  n: "-.",
+  o: "---",
+  p: ".--.",
+  q: "--.-",
+  r: ".-.",
+  s: "...",
+  t: "-",
+  u: "..-",
+  v: "...-",
+  w: ".--",
+  x: "-..-",
+  y: "-.--",
+  z: "--..",
+}
+  letter = word.split(//)
+  arr = letter.map do |x|
+    dictionary[x.to_sym]
+    end
+    arr.join(' ')
+end
